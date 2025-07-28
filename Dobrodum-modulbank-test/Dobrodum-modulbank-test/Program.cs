@@ -1,4 +1,5 @@
-using Dobrodum_modulbank_test;
+using Dobrodum_modulbank_test.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var appContext = new ApplicationSQliteContext();
 
@@ -23,15 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     // Эндпоинт для проверки переменных
-    app.MapGet("/env", (IConfiguration config) =>
-    {
-        return Results.Json(
-            new Dictionary<string, string> 
-            {
-                { "fieldSizeConfig", config["fieldSize"] }
-            }
-        );
-    });
+    app.MapGet("/health", () => "Работает");
 }
 
 app.MapControllers();

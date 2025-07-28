@@ -150,3 +150,4 @@ D:\YandexDisk\Yandex.Disk\Projects\Тестовые\Модуль банк\Dobrod
 D:\YandexDisk\Yandex.Disk\Projects\Тестовые\Модуль банк\Dobrodum-modulbank-test\Dobrodum-modulbank-test\obj\Debug\net9.0\Dobrodum-modulbank-test.pdb
 D:\YandexDisk\Yandex.Disk\Projects\Тестовые\Модуль банк\Dobrodum-modulbank-test\Dobrodum-modulbank-test\obj\Debug\net9.0\Dobrodum-modulbank-test.genruntimeconfig.cache
 D:\YandexDisk\Yandex.Disk\Projects\Тестовые\Модуль банк\Dobrodum-modulbank-test\Dobrodum-modulbank-test\obj\Debug\net9.0\ref\Dobrodum-modulbank-test.dll
+D:\YandexDisk\Yandex.Disk\Projects\Тестовые\Модуль банк\Dobrodum-modulbank-test\Dobrodum-modulbank-test\obj\Debug\net9.0\Dobrodum-modulbank-test.sourcelink.json

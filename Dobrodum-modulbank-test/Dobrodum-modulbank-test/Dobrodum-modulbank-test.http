@@ -1,13 +1,8 @@
-@Dobrodum_modulbank_test_HostAddress = http://localhost:32794
-
-GET {{Dobrodum_modulbank_test_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+@Dobrodum_modulbank_test_HostAddress = http://localhost:32768
 
 GET {{Dobrodum_modulbank_test_HostAddress}}/swagger/v1/swagger.json
 ###
 
-GET {{Dobrodum_modulbank_test_HostAddress}}/env
+GET {{Dobrodum_modulbank_test_HostAddress}}/health
 ###
 

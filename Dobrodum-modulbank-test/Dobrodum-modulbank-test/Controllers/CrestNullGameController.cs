@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Dobrodum_modulbank_test.Models;
+using Dobrodum_modulbank_test.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace Dobrodum_modulbank_test.Controllers
 {
@@ -20,12 +22,19 @@ namespace Dobrodum_modulbank_test.Controllers
         }
 
         [HttpPost("newGame")]
-        public uint PostGame()
+        public IActionResult PostGame()
         {
-            var newGame = new CrestNullGame(fieldSize, winningLength, percentageOfOccupiedCells);
-            appDbContext.Games.Add(newGame);
-            appDbContext.SaveChanges();
-            return newGame.Id;
+            try
+            {
+                var newGame = new CrestNullGame(fieldSize, winningLength, percentageOfOccupiedCells);
+                appDbContext.Games.Add(newGame);
+                appDbContext.SaveChanges();
+                return Ok(newGame.Id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("moves")]
@@ -34,10 +43,17 @@ namespace Dobrodum_modulbank_test.Controllers
             try
             {
                 var game = appDbContext.Games.Find(id);
-                game.NextMove(x, y, symbol);
-                appDbContext.Games.Update(game);
-                appDbContext.SaveChanges();
-                return Ok((game.GameState, game.Round));
+                if (game.NextMove(x, y, symbol) == 1)
+                {
+                    appDbContext.Games.Update(game);
+                    appDbContext.SaveChanges();
+                }
+
+                var GameStateString = game.GameState.ToString();
+                var etag = GenerateETag(GameStateString + game.Round.ToString());
+                Response.Headers.ETag = etag;
+
+                return Ok(new { GameState = GameStateString, game.Round });
             }
             catch (Exception ex)
             {
@@ -49,8 +65,10 @@ namespace Dobrodum_modulbank_test.Controllers
         public IActionResult GetGame(uint id)
         {
             try
-            {            
-                return Ok(appDbContext.Games.Find(id));
+            {   var game = appDbContext.Games.Find(id);
+                if (game == null)
+                    return NotFound("Игра не найдена");  
+                return Ok(game);
             }
             catch (Exception ex)
             {
@@ -58,5 +76,13 @@ namespace Dobrodum_modulbank_test.Controllers
             }
         }
 
+        private string GenerateETag(string data)
+        {
+            using (var sha1 = System.Security.Cryptography.SHA1.Create())
+            {
+                byte[] hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(data));
+                return Convert.ToBase64String(hashBytes);
+            }
+        }
     }
 }

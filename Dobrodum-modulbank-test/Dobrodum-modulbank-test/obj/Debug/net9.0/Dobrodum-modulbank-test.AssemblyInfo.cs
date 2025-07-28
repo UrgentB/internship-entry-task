@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dobrodum-modulbank-test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8c560ed0214ee1f9b3670bbc3967d046f45958e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dobrodum-modulbank-test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dobrodum-modulbank-test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
